@@ -1,5 +1,6 @@
 package m.eight.evaluator.domain.use_case.properties
 
+import kotlinx.coroutines.flow.first
 import m.eight.evaluator.domain.model.PropertyName
 import m.eight.evaluator.domain.repository.EntityRepository
 import m.eight.evaluator.domain.repository.PropertyNameRepository
@@ -13,8 +14,7 @@ class RemoveProperty(
 
     suspend operator fun invoke(propertyName: PropertyName) =
         propertyNameRepository.remove(propertyName).apply {
-
-            entityRepository.getAllAsList(propertyName.categoryUUID).forEach { entity ->
+            entityRepository.getAll(propertyName.categoryUUID).first().forEach { entity ->
                 val sum = propertyValueRepository.sum(entity.uuid)
                 val count = propertyNameRepository.count(entity.categoryUUID)
                 val avg = if (sum == 0.0f || count == 0) 0.0f else sum / count

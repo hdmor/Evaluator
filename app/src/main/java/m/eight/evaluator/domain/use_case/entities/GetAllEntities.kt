@@ -7,5 +7,5 @@ import java.util.UUID
 
 class GetAllEntities(private val repository: EntityRepository) {
 
-    operator fun invoke(categoryUUID: UUID): Flow<List<Entity>> = repository.getAllAsFlow(categoryUUID)
+    operator fun invoke(categoryUUID: UUID): Flow<List<Entity>> = repository.getAll(categoryUUID)
 }

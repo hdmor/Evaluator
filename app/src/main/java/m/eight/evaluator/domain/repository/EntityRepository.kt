@@ -6,8 +6,7 @@ import java.util.UUID
 
 interface EntityRepository {
 
-    fun getAllAsFlow(categoryUUID: UUID): Flow<List<Entity>>
-    suspend fun getAllAsList(categoryUUID: UUID): List<Entity>
+    fun getAll(categoryUUID: UUID): Flow<List<Entity>>
     suspend fun updateScore(score: Float, entityUUID: UUID)
     suspend fun addOrUpdate(entity: Entity)
     suspend fun remove(entity: Entity)

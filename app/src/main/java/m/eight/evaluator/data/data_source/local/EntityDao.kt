@@ -12,10 +12,7 @@ import java.util.UUID
 interface EntityDao {
 
     @Query("SELECT * FROM entities WHERE categoryUUID = :categoryUUID ORDER BY score DESC")
-    fun selectAllAsFlow(categoryUUID: UUID): Flow<List<Entity>>
-
-    @Query("SELECT * FROM entities WHERE categoryUUID = :categoryUUID ORDER BY score DESC")
-    suspend fun selectAllAsList(categoryUUID: UUID): List<Entity>
+    fun selectAll(categoryUUID: UUID): Flow<List<Entity>>
 
     @Query("UPDATE entities SET score = :score WHERE uuid = :entityUUID")
     suspend fun updateScore(score: Float, entityUUID: UUID)
